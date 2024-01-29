@@ -16,7 +16,15 @@ class RegisterViewModel : ViewModel() {
         return liveData
     }
 
-    fun makeApiCall(registerRequest: RegisterRequest) {
+    fun RegisttraionLogic(email:String,password:String,repeatpassword:String){
+        if (email.isEmpty() || password.isEmpty()||repeatpassword.isEmpty()){
+            liveData.postValue(null)
+            return
+        }else if (password!=repeatpassword){
+            liveData.postValue(null)
+            return
+        }
+        val registerRequest = RegisterRequest(email, password)
         val retroInstance = retroInstance().getRetroInstance()
         val retroService = retroInstance.create(loginInterface::class.java)
         val call = retroService.registerUser(registerRequest)
@@ -30,4 +38,8 @@ class RegisterViewModel : ViewModel() {
             }
         })
     }
-}
+
+
+    }
+
+
