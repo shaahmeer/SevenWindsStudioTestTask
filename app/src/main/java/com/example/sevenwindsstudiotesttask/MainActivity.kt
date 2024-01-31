@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         val password = binding.Password.text.toString()
         val repeatPassword = binding.RepeatPAssword.text.toString()
 
-        viewModel.RegisttraionLogic(email,password,repeatPassword)
+        viewModel.RegistrationLogic(email,password,repeatPassword)
     }
 
 

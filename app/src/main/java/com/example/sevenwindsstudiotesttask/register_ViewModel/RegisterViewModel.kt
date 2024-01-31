@@ -1,5 +1,6 @@
 package com.example.sevenwindsstudiotesttask.register_ViewModel
 
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sevenwindsstudiotesttask.model.AuthResponse
@@ -16,14 +17,20 @@ class RegisterViewModel : ViewModel() {
         return liveData
     }
 
-    fun RegisttraionLogic(email:String,password:String,repeatpassword:String){
-        if (email.isEmpty() || password.isEmpty()||repeatpassword.isEmpty()){
+    fun RegistrationLogic(email: String, password: String, repeatPassword: String) {
+        if (email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()) {
             liveData.postValue(null)
-            return
-        }else if (password!=repeatpassword){
+        } else if (password != repeatPassword) {
             liveData.postValue(null)
-            return
+        } else if (password.length < 6) {
+            liveData.postValue(null)
+
+
+        } else {
+            Toast.makeText(this@RegisterViewModel, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show()
+
         }
+
         val registerRequest = RegisterRequest(email, password)
         val retroInstance = retroInstance().getRetroInstance()
         val retroService = retroInstance.create(loginInterface::class.java)
